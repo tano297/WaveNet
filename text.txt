@@ -1,0 +1,1 @@
+If you are hearing this, your credentials and environment are properly configured. Move on to step three to generate your own audio.
