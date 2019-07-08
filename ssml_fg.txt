@@ -1,0 +1,5 @@
+<speak>
+  Hi. Welcome to fast genomics - the platform for single cell transcriptomics.
+  Fast genomics for single cell transcriptomics is a new platform to analyze single cell expression data designed to fit your research routine.
+  Scanpy, scanpie, anndata, seurat, satija, t-SNE, <say-as interpret-as="characters">t</say-as>SNE, pseudotime analysis, umap, <say-as interpret-as="characters">hdb</say-as>scan, log-normalized, single<say-as interpret-as="characters">R</say-as>, 10x three thousand <say-as interpret-as="characters">pbmc</say-as>s, <say-as interpret-as="characters">pbm</say-as>sees, drop-seq, drop seek, <say-as interpret-as="characters">RNA</say-as>seq, <say-as interpret-as="characters">RNA</say-as>seek, transcriptomes, Smart-seq2, Smart seek 2, Louvain clusterin, mitochondrial, ribosomal, monocytes, erythrocytes, epithelium, macrophages, scikit-learn, scipy, igraph, github, ID <break time="0.5s"/> <say-as interpret-as="characters">GSE</say-as> 9 2 3 3 2, Macosko
+</speak>
