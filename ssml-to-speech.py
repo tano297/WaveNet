@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
+
+"""
+This script can be used to generate an audio from a ssml text file using google cloud services.
+More information on https://github.com/tano297/WaveNet
+Example:
+>> python ssml-to-speech.py ssml.txt
+"""
+
+
 import os
 import sys
+
+# get text file
+text_file = sys.argv[1]
 
 # speak stuff
 speak_rate = 1.0
@@ -54,8 +66,8 @@ if __name__ == '__main__':
     client = texttospeech.TextToSpeechClient()
 
   # open ssml file as a list of lines
-  with open("ssml.txt") as f:
+  with open(text_file) as f:
     content = f.read()
   print(content)
   audio = synthesize_ssml(content, client)
-  write_to_file(audio, 'ssml')
+  write_to_file(audio, text_file.split('.')[0])

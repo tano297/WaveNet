@@ -1,5 +1,11 @@
 <speak>
-  Hi. Welcome to fast genomics - the platform for single cell transcriptomics.
-  Fast genomics for single cell transcriptomics is a new platform to analyze single cell expression data designed to fit your research routine.
-  Scanpy, scanpie, anndata, seurat, satija, t-SNE, <say-as interpret-as="characters">t</say-as>SNE, pseudotime analysis, umap, <say-as interpret-as="characters">hdb</say-as>scan, log-normalized, single<say-as interpret-as="characters">R</say-as>, 10x three thousand <say-as interpret-as="characters">pbmc</say-as>s, <say-as interpret-as="characters">pbm</say-as>sees, drop-seq, drop seek, <say-as interpret-as="characters">RNA</say-as>seq, <say-as interpret-as="characters">RNA</say-as>seek, transcriptomes, Smart-seq2, Smart seek 2, Louvain clusterin, mitochondrial, ribosomal, monocytes, erythrocytes, epithelium, macrophages, scikit-learn, scipy, igraph, github, ID <break time="0.5s"/> <say-as interpret-as="characters">GSE</say-as> 9 2 3 3 2, Macosko
+  For starters, you may choose a standard workflow to explore the overall structure of the data and to produce optimal downstream analysis results. Two workflows that involve the typical first steps of a single cell RNA seek data analysis are the "Generalized preprocessing workflow" by Lücken and Tise 2019 and the "Standard single cell RNA seek analysis" as applied by the leemas institute. The latter is based on the Seurat guided clustering tutorial. Both workflows include quality control, filtering, normalization, selection of highly variable genes, and clustering.
+  
+  Some workflows allow setting certain parameters such as filter thresholds, the number of PCA components, or whether or not to save the analysis output as an anndata object. This is usually passed over in Jason format. Every workflow has default parameters, so we do not need to put anything here.
+  
+  Finally, let's choose a dataset. Again, a window pops up and let's you choose the dataset that you're interested in. Here, we choose the ten x PBMC dataset.
+  Click on apply.
+  And then on "create and start calculation".
+  
+  Now we are set. We have to wait for the cloud resources to be allocated and for the calculation to finish. This is a good time to grab a coffee.
 </speak>
