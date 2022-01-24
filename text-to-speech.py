@@ -10,19 +10,20 @@ def synthesize_text(text, client):
   """Synthesizes speech from the input string of text."""
 
   # input format
-  input_text = texttospeech.types.SynthesisInput(text=text)
+  input_text = texttospeech.SynthesisInput(text=text)
 
   # Note: the voice can also be specified by name.
   # Names of voices can be retrieved with client.list_voices().
-  voice = texttospeech.types.VoiceSelectionParams(
+  voice = texttospeech.VoiceSelectionParams(
       language_code='en-US',
-      ssml_gender=texttospeech.enums.SsmlVoiceGender.MALE)
+      ssml_gender=texttospeech.SsmlVoiceGender.MALE)
 
-  audio_config = texttospeech.types.AudioConfig(
-      audio_encoding=texttospeech.enums.AudioEncoding.MP3,
+  audio_config = texttospeech.AudioConfig(
+      audio_encoding=texttospeech.AudioEncoding.MP3,
       speaking_rate=speak_rate)
 
-  response = client.synthesize_speech(input_text, voice, audio_config)
+  response = client.synthesize_speech(
+      request={"input": input_text, "voice": voice, "audio_config": audio_config})
 
   return response.audio_content
 

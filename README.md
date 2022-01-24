@@ -9,9 +9,9 @@ This code uses the Python API to access the [Text-to-speech service from Google 
 Download and install dependencies:
 
 ```sh
-$ sudo apt install python3-dev python3-pip vlc
+$ sudo apt install python3-dev python3-pip
 $ sudo pip3 install --upgrade pip
-$ sudo pip3 install --upgrade google-cloud-texttospeech python-vlc
+$ sudo pip3 install --upgrade google-cloud-texttospeech playsound
 ```
 
 ## Step 1: Credentials
