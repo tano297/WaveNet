@@ -38,11 +38,12 @@ def write_to_file(audio, name):
     with open(str(name) + '.ogg', 'wb') as out:
       print('Audio content written to file', name)
       out.write(audio)
+    os.chdir('..')
 
 def concat_oggs(oggs, output):
     input_args = []
     for ogg in oggs:
-      input_args.append(ffmpeg.input(ogg))
+      input_args.append(ffmpeg.input('RAW/'+ogg))
     ffmpeg.concat(*input_args, v=0, a=1).output(output).run()
 
 def trim_to_nearest_punctuation(input_str):
@@ -85,12 +86,21 @@ if __name__ == '__main__':
   # remove empty lines
   content = [x for x in content if len(x) > 0]
 
-  # download every line of text into a numbered ogg
+  # enter/create an output folder
+  if not os.path.exists('Outputs'):
+    os.makedirs('Outputs')
+  os.chdir('Outputs')
+  
+  # values to be used later
   oggsname=[]
   title=trim_to_nearest_punctuation(content[0])
+  
+  # create and move in a new folder
   if not os.path.exists(title):
     os.makedirs(title)
   os.chdir(title)
+  
+  # download every line of text into a numbered ogg
   for i, line in enumerate(content):
     audio = synthesize_text(line, client)
     write_to_file(audio, str(i))
