@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import os
 import sys
+import ffmpeg
+import string
 
 # speak stuff
-speak_rate = 1.0
+speak_rate = 1.3
 
 
 def synthesize_text(text, client):
@@ -15,25 +17,45 @@ def synthesize_text(text, client):
   # Note: the voice can also be specified by name.
   # Names of voices can be retrieved with client.list_voices().
   voice = texttospeech.VoiceSelectionParams(
-      language_code='en-US',
-      ssml_gender=texttospeech.SsmlVoiceGender.MALE)
+    language_code='en-GB',
+    name='en-GB-Studio-B')
 
   audio_config = texttospeech.AudioConfig(
-      audio_encoding=texttospeech.AudioEncoding.MP3,
-      speaking_rate=speak_rate)
+    audio_encoding=texttospeech.AudioEncoding.OGG_OPUS,
+    speaking_rate=speak_rate)
 
   response = client.synthesize_speech(
-      request={"input": input_text, "voice": voice, "audio_config": audio_config})
+    request={"input": input_text, "voice": voice, "audio_config": audio_config})
 
   return response.audio_content
 
 
 def write_to_file(audio, name):
-  # The response's audio_content is binary.
-  with open(str(name) + '.mp3', 'wb') as out:
-    print('Audio content written to file', name)
-    out.write(audio)
+    # The response's audio_content is binary.
+    if not os.path.exists('RAW'):
+      os.makedirs('RAW')
+    os.chdir('RAW')
+    with open(str(name) + '.ogg', 'wb') as out:
+      print('Audio content written to file', name)
+      out.write(audio)
 
+def concat_oggs(oggs, output):
+    input_args = []
+    for ogg in oggs:
+      input_args.append(ffmpeg.input(ogg))
+    ffmpeg.concat(*input_args, v=0, a=1).output(output).run()
+
+def trim_to_nearest_punctuation(input_str):
+    # Set of punctuation marks
+    punctuation_set = set(string.punctuation)
+
+    # Iterate through the characters to find the nearest punctuation
+    for i, char in enumerate(input_str):
+        if char in punctuation_set:
+            return input_str[:i]
+
+    # If no punctuation is found, return the original string
+    return input_str
 
 if __name__ == '__main__':
 
@@ -63,7 +85,14 @@ if __name__ == '__main__':
   # remove empty lines
   content = [x for x in content if len(x) > 0]
 
-  # download every line of text into a numbered mp3
+  # download every line of text into a numbered ogg
+  oggsname=[]
+  title=trim_to_nearest_punctuation(content[0])
+  if not os.path.exists(title):
+    os.makedirs(title)
+  os.chdir(title)
   for i, line in enumerate(content):
     audio = synthesize_text(line, client)
     write_to_file(audio, str(i))
+    oggsname.append(str(i) + '.ogg')
+  concat_oggs(oggsname, title+'.ogg')
