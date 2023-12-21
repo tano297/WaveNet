@@ -4,6 +4,8 @@ import sys
 import ffmpeg
 import string
 import multiprocessing
+from functools import partial
+from google.cloud import texttospeech
 
 # speak stuff
 speak_rate = 1.3
@@ -32,6 +34,7 @@ def synthesize_text(text, client):
 
 def synth_text_speech(args):
     i,line = args
+    client = texttospeech.TextToSpeechClient()
     audio = synthesize_text(line, client)
     write_to_file(audio, str(i))
 
@@ -79,7 +82,6 @@ if __name__ == '__main__':
     credential = os.path.join(pwd, "credentials", credential)
     print("Found credential file", credential)
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential
-    from google.cloud import texttospeech
     client = texttospeech.TextToSpeechClient()
 
   # open text file as a list of lines
